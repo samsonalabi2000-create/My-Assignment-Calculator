@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/output.css">
+</head>
+    <!-- Body -->
+<body class="bg-gray-800 flex items-center justify-center min-h-screen">
+    <div class="bg-gray-900 p-6 rounded-3xl shadow-3xl w-80">
+        <!-- Display -->
+        <div class="bg-gray-700 text-right text-white p-4 rounded-xl mb-4">
+            <div id="expression" class="text-sm text-gray-300 h-6"></div>
+        <div id="display" class="text-4xl font-bold">
+            0
+        </div>
+        </div>
+
+        <!-- Button  -->
+        <!-- Button first row -->
+        <div class="grid grid-cols-4 gap-3 text-white">
+            <button onclick="clearDisplay()" class="bg-orange-500 hover:bg-amber-600 p-3 rounded-lg font-semibold">
+            AC
+        </button>
+        <button onclick="toggleSign()" class="bg-gray-600 hover:bg-gray-700 p-3 rounded-lg">
+            +/-
+        </button>
+        <button onclick="append('%')" class="bg-gray-600 hover:bg-gray-700 p-3 rounded-lg">
+            %
+        </button>
+        <button onclick="append('/')" class="bg-gray-600 hover:bg-gray-700 p-3 rounded-lg">
+            ÷
+        </button>
+
+        <!-- Button second row -->
+        <button onclick="append('7')" class="bg-amber-600 hover:bg-amber-700 p-3 rounded-lg">
+            7
+        </button>
+
+        <button onclick="append('8')" class="bg-amber-600 hover:bg-amber-700 p-3 rounded-lg">
+            8
+        </button>
+        
+        <button onclick="append('9')" class="bg-amber-600 hover:bg-amber-700 p-3 rounded-lg">
+            9
+        </button>
+        
+        <button onclick="append('*')" class="bg-blue-600 hover:bg-blue-700 p-3 rounded-lg">
+            ×
+        </button> 
+
+        <!-- Button third row -->
+        <button onclick="append('4')" class="bg-amber-600 hover:bg-amber-700 p-3 rounded-lg">
+            4
+        </button>
+
+        <button onclick="append('5')" class="bg-amber-600 hover:bg-amber-700 p-3 rounded-lg">
+            5
+        </button>
+        
+        <button onclick="append('6')" class="bg-amber-600 hover:bg-amber-700 p-3 rounded-lg">
+            6
+        </button>
+        
+        <button onclick="append('-')" class="bg-red-600 hover:bg-red-700 p-3 rounded-lg">
+            -
+        </button>
+        
+        <!-- Button third row -->
+                <button onclick="append('1')" class="bg-amber-600 hover:bg-amber-700 p-3 rounded-lg">
+            1
+        </button>
+
+        <button onclick="append('2')" class="bg-amber-600 hover:bg-amber-700 p-3 rounded-lg">
+            2
+        </button>
+        
+        <button onclick="append('3')" class="bg-amber-600 hover:bg-amber-700 p-3 rounded-lg">
+            3
+        </button>
+        
+        <button onclick="append('+')" class="bg-blue-600 hover:bg-blue-700 p-3 rounded-lg">
+            +
+        </button>
+        
+        <!-- Button fourth row -->
+        <button onclick="append('0')" class="col-span-2 bg-amber-600 hover:bg-amber-700 p-3 rounded-lg">0</button>
+        <button onclick="calculate()" class="col-span-2 bg-blue-700 hover:bg-blue-800 p-3 rounded-lg font-bold">=</button>
+
+    </div>
+    </div>
+
+    <!-- JaVaScript -->
+    <script>
+    let expression = "";
+
+    function updateDisplay() {
+      document.getElementById("display").textContent =
+        expression || "0";
+      document.getElementById("expression").textContent = expression;
+    }
+
+    function append(value) {
+      expression += value;
+      updateDisplay();
+    }
+
+    function clearDisplay() {
+      expression = "";
+      updateDisplay();
+    }
+
+    function toggleSign() {
+      if (expression) {
+        if (expression.startsWith("-")) {
+          expression = expression.slice(1);
+        } else {
+          expression = "-" + expression;
+        }
+        updateDisplay();
+      }
+    }
+
+    function calculate() {
+      try {
+        expression = eval(expression).toString();
+      } catch {
+        expression = "Error";
+      }
+      updateDisplay();
+    }
+
+    updateDisplay();
+  </script>
+
+  <style>
+    /* Reusable Tailwind component using @apply */
+    .btn {
+      @apply bg-gray-700 hover:bg-gray-600 p-3 rounded-lg font-semibold;
+    }
+  </style>
+
+  <script src="/src/js/script.js"></script>
+
+
+</body>
+</html>
